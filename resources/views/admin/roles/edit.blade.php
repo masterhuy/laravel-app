@@ -2,8 +2,7 @@
 @section('title', 'Edit Roles '.$role->name)
 @section('content')
     <div class="card py-4 px-4">
-        <h1>Edit role</h1>
-
+        <h3>Edit role</h3>
         <div>
             <form action="{{ route('roles.update', $role->id) }}" method="post">
                 @csrf
@@ -37,7 +36,6 @@
                     @enderror
                 </div>
 
-
                 <div class="form-group">
                     <label for="">Permission</label>
                     <div class="row">
@@ -48,13 +46,14 @@
                                     @foreach ($permission as $item)
                                         <div class="form-check">
                                             <input
+                                                id="customCheck-{{ $item->id }}"
                                                 class="form-check-input"
                                                 name="permission_ids[]"
                                                 type="checkbox"
                                                 value="{{ $item->id }}"
                                                 {{ $role->permissions->contains('name', $item->name) ? 'checked' : '' }}
                                             >
-                                            <label class="custom-control-label" for="customCheck1">{{ $item->display_name }}</label>
+                                            <label class="custom-control-label" for="customCheck-{{ $item->id }}">{{ $item->display_name }}</label>
                                         </div>
                                     @endforeach
                                 </div>

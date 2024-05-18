@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Permission;
 use App\Models\Role;
-
+use Spatie\Permission\Models\Permission as ModelsPermission;
 
 class RoleController extends Controller
 {
@@ -28,7 +28,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::all()->groupBy('group');
+        $permissions = ModelsPermission::all()->groupBy('group');
         return view('admin.roles.create', compact('permissions'));
     }
 
@@ -53,8 +53,10 @@ class RoleController extends Controller
         $dataCreate = $request->all();
         // dd($dataCreate);
         $role = Role::create($dataCreate);
+        if(isset($dataCreate['permission_ids'])){
+            $role->permissions()->attach($dataCreate['permission_ids']);
+        }
 
-        $role->permissions()->attach($dataCreate['permission_ids']);
         return to_route('roles.index')->with(['message' => 'Create success']);
     }
 
@@ -78,7 +80,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::with('permissions')->findOrFail($id);
-        $permissions = Permission::all()->groupBy('group');
+        $permissions = ModelsPermission::all()->groupBy('group');
         return view('admin.roles.edit', compact('role', 'permissions'));
     }
 

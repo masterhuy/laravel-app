@@ -25,6 +25,7 @@
         <!-- Nucleo Icons -->
         <link href="{{ asset('admin/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
         <link href="{{ asset('admin/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+        <link href="{{ asset('admin/assets/css/custom.css') }}" rel="stylesheet" />
         <!-- Font Awesome Icons -->
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
         <!-- Material Icons -->
@@ -523,5 +524,7 @@
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="{{ asset('admin/assets/js/material-dashboard.min.js?v=3.1.0') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="{{ asset('admin/assets/js/custom.js') }}"></script>
     </body>
 </html>

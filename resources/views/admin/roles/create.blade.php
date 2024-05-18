@@ -2,7 +2,7 @@
 @section('title', 'Create Roles')
 @section('content')
     <div class="card py-4 px-4">
-        <h1>Create role</h1>
+        <h3>Create role</h3>
 
         <div>
             <form action="{{ route('roles.store') }}" method="post">
@@ -36,7 +36,6 @@
                     @enderror
                 </div>
 
-
                 <div class="form-group">
                     <label for="">Permission</label>
                     <div class="row">
@@ -46,8 +45,8 @@
                                 <div>
                                     @foreach ($permission as $item)
                                         <div class="form-check">
-                                            <input class="form-check-input" name="permission_ids[]" type="checkbox" value="{{ $item->id }}">
-                                            <label class="custom-control-label" for="customCheck1">{{ $item->display_name }}</label>
+                                            <input id="customCheck-{{ $item->id }}" class="form-check-input" name="permission_ids[]" type="checkbox" value="{{ $item->id }}">
+                                            <label class="custom-control-label" for="customCheck-{{ $item->id }}">{{ $item->display_name }}</label>
                                         </div>
                                     @endforeach
                                 </div>
