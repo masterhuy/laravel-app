@@ -6,6 +6,7 @@ use App\Models\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
+use Spatie\Permission\Models\Permission as ModelsPermission;
 
 class RoleDatabaseSeeder extends Seeder
 {
@@ -57,7 +58,7 @@ class RoleDatabaseSeeder extends Seeder
             ['name' => 'update-order-status', 'display_name' => 'Update order status', 'group' => 'orders'],
         ];
         foreach($permissions as $permission){
-            Permission::updateOrCreate($permission);
+            ModelsPermission::updateOrCreate($permission);
         }
 
 

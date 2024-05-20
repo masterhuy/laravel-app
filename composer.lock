@@ -574,7 +574,7 @@
             "require": {
                 "asm89/stack-cors": "^2.0.1",
                 "illuminate/contracts": "^6|^7|^8|^9",
-                "illuminate/support": "^6|^7|^8|^9",
+                "illuminate/support": "^4|^6|^7|^8|^9",
                 "php": ">=7.2"
             },
             "require-dev": {
