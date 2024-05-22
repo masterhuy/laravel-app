@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\CreateUserRequest;
@@ -39,8 +39,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::all()->groupBy('group');
-        return view('admin.users.create', compact('permissions'));
+        return view('admin.users.create');
     }
 
     /**
@@ -66,10 +65,12 @@ class UserController extends Controller
         // ]);
 
         $dataCreate = $request->all();
-        $dataCreate['image'] = $this->user->saveImage($request);
-        dd($dataCreate);exit;
-        $user = User::create($dataCreate);
+        // dd($request->all());exit;
 
+        $dataCreate['image'] = $this->user->saveImage($request);
+        // dd($dataCreate);exit;
+        $user = User::create($dataCreate);
+        $user->images()->create(['url' => $dataCreate['image']]);
         return to_route('users.index')->with(['message' => 'Create user success']);
     }
 
@@ -107,7 +108,14 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $dataUpdate = $request->all();
-        // dd($dataUpdate);
+
+        $currentImage = $user->images->count() > 0 ? $user->images->first()->url : '';
+
+        // dd($request);
+        $dataUpdate['image'] = $this->user->updateImage($request, $currentImage);
+        // dd($request);exit;
+        $user->images()->delete();
+        $user->images()->create(['url' => $dataUpdate['image']]);
         $user->update($dataUpdate);
 
         return to_route('users.index')->with(['message' => 'Update user success']);
@@ -121,7 +129,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return to_route('users.index')->with(['message' => 'Delete success']);
+        $user =  $this->user->findOrFail($id);
+        $user->images()->delete();
+        $imageName =  $user->images->count() > 0 ? $user->images->first()->url : '';
+        $this->user->deleteImage($imageName);
+        $user->delete();
+
+        return redirect()->route('users.index')->with(['message' => 'Delete success']);
+
     }
 }

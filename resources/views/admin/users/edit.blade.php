@@ -5,9 +5,25 @@
         <h3>Edit user</h3>
 
         <div>
-            <form action="{{ route('users.update', $user->id) }}" method="post">
+            <form action="{{ route('users.update', $user->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+
+                <div class="row">
+                    <div class=" input-group-static col-5 mb-4">
+                        <label>Image</label>
+                        <input type="file" accept="image/*" name="image" id="image-input" class="form-control">
+
+                        @error('image')
+                            <span class="text-danger"> {{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-5">
+                        <img width="100" height="100" src="{{ $user->images->count() > 0 ? asset('upload/users/' . $user->images->first()->url) : 'upload/users/default.png' }}"
+                            id="show-image" alt="">
+                    </div>
+                </div>
+
                 <div class="input-group input-group-static mb-4">
                     <label>Name</label>
                     <input type="text" value="{{ old('name') ?? $user->name }}" name="name" class="form-control">
@@ -61,4 +77,24 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#show-image').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#image-input").change(function() {
+                readURL(this);
+                console.log("aa")
+            });
+        })
+    </script>
 @endsection

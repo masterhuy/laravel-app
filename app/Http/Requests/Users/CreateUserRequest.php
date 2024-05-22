@@ -25,7 +25,8 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:users',
-            'email' => 'required|email',
+            'image' => 'required|image|mimes:png,jpg,PNG',
+            'email' => 'required|email|unique:users',
             'password' => 'required|max:10',
             'phone' => 'required',
             'address' => 'required',
@@ -38,6 +39,8 @@ class CreateUserRequest extends FormRequest
         return [
             'name.required' => 'This field is required',
             'name.unique' => 'This name is existed',
+
+            'image.required' => 'This field is required',
 
             'email.required' => 'This field is required',
             'email.email' => 'This field is email',

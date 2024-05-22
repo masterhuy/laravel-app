@@ -16,6 +16,7 @@
         <table class="table table-hover">
             <tr>
                 <th>#</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Password</th>
@@ -28,6 +29,7 @@
             @foreach ($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
+                    <td><img width="100" height="100" src={{ $user->images->count() > 0 ? asset('upload/users/' . $user->images->first()->url) : 'upload/users/default.png'}} /></td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->phone }}</td>

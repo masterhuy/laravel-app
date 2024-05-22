@@ -107,7 +107,7 @@ class RoleController extends Controller
         $dataUpdate = $request->all();
         // dd($dataCreate);
         $role->update($dataUpdate);
-        $role->permissions()->sync($dataUpdate['permission_ids']);
+        $role->permissions()->sync($dataUpdate['permission_ids'] ?? []);
         return to_route('roles.index')->with(['message' => 'Edit success']);
     }
 
