@@ -18,19 +18,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {{ request()->routeIs('roles.index') ? 'bg-gradient-primary active' : '' }}" href="{{ route('roles.index') }}" >
+                <a class="nav-link text-white {{ request()->routeIs('roles.*') ? 'bg-gradient-primary active' : '' }}" href="{{ route('roles.index') }}" >
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
-                    <span class="nav-link-text ms-1">Role</span>
+                    <span class="nav-link-text ms-1">Roles</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {{ request()->routeIs('users.index') ? 'bg-gradient-primary active' : '' }}" href="{{ route('users.index') }}">
+                <a class="nav-link text-white {{ request()->routeIs('users.*') ? 'bg-gradient-primary active' : '' }}" href="{{ route('users.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">receipt_long</i>
                     </div>
-                    <span class="nav-link-text ms-1">User</span>
+                    <span class="nav-link-text ms-1">Users</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -38,15 +38,15 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">view_in_ar</i>
                     </div>
-                    <span class="nav-link-text ms-1">Product</span>
+                    <span class="nav-link-text ms-1">Products</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="./rtl.html">
+                <a class="nav-link text-white {{ request()->routeIs('categories.*') ? 'bg-gradient-primary active' : '' }}" href="{{ route('categories.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
                     </div>
-                    <span class="nav-link-text ms-1">Category</span>
+                    <span class="nav-link-text ms-1">Categories</span>
                 </a>
             </li>
 
