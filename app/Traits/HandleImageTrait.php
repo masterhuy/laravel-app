@@ -9,7 +9,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 trait HandleImageTrait
 {
-    protected string $path = 'public/upload/users/';
+    protected string $path = 'public/upload/';
 
     /**
      * @param $request
@@ -34,8 +34,8 @@ trait HandleImageTrait
             $name = time() . preg_replace("/( |　)/", "", $file->getClientOriginalName() );
             $img = $manager->read($request->file('image'));
             $img = $img->resize(300, 300);
-            $img->toJpeg(80)->save(base_path('public/upload/users/'.$name));
-            $save_url = 'uploads/users/'.$name;
+            $img->toJpeg(80)->save(base_path('public/upload/'.$name));
+            $save_url = 'uploads/'.$name;
 
             // $file = $request->file('image');
             // $name = time() . $file->getClientOriginalName();

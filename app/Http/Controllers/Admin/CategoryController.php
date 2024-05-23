@@ -99,8 +99,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = $this->category->findOrFail($id);
-        $category->delete();
+        // $category = $this->category->findOrFail($id);
+        // $category->delete();
+        Category::destroy($id);
         return to_route('categories.index')->with(['message' => 'Delete successfully']);
     }
 }

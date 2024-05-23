@@ -13,6 +13,6 @@ class ProductDetail extends Model
         'product_id',
         'size',
         'color',
-        'quanlity'
+        'quantity'
     ];
 }
