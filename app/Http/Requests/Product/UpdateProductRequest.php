@@ -24,7 +24,7 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|image|mimes:png,jpg,PNG,'.$this->product,
+            'image' => 'image|mimes:png,jpg,PNG,'.$this->product,
             'name' => 'required',
             'description' => 'required',
             'sale' => 'required',

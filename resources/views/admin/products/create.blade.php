@@ -87,7 +87,7 @@
                     <select name="category_ids[]" class="form-control" multiple>
                         <option value="">Select category</option>
                         @foreach ($categories as $item )
-                            <option value="{{ $item->id }}" {{ old('categories') == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
                     </select>
                 </div>

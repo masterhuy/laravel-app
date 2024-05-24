@@ -4,3 +4,6 @@
 .ck-editor{
     width: 100% !important;
 }
+.pd-categories label span:not(:last-child)::after{
+    content: ', ';
+}

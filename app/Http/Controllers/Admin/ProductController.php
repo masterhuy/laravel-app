@@ -51,7 +51,7 @@ class ProductController extends Controller
     {
         $dataCreate = $request->except('sizes');
         $sizes = $request->sizes ? json_decode($request->sizes) : [];
-        // dd($request->sizes);exit;
+        // dd($dataCreate);exit;
         $product = Product::create($dataCreate);
         $dataCreate['image'] = $this->product->saveImage($request);
         $product->images()->create(['url' => $dataCreate['image']]);

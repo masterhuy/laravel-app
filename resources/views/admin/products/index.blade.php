@@ -28,8 +28,8 @@
                     <td>{{ $product->id }}</td>
                     <td><img width="100" height="100" src={{ $product->images->count() > 0 ? asset('upload/' . $product->images->first()->url) : 'upload/default.png'}} /></td>
                     <td>{{ $product->name }}</td>
-                    <td>{{ $product->price }}</td>
-                    <td>{{ $product->sale }}</td>
+                    <td>{{ $product->price }} $</td>
+                    <td>{{ $product->sale }} $</td>
                     <td>
                         <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a>
                         <a href="{{ route('products.show', $product->id) }}" class="btn btn-info">Show</a>

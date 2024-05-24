@@ -19,15 +19,15 @@
             </div>
 
             <div class="form-group">
-                <label>Description : {{ $product->description }}</label>
+                <label>Description : {{ strip_tags($product->description) }}</label>
             </div>
 
             <div class="form-group">
-                <label>Price: {{ $product->price }}</label>
+                <label>Price: {{ $product->price }} $</label>
             </div>
 
             <div class="form-group">
-                <label>Sale: {{ $product->sale }}</label>
+                <label>Sale: {{ $product->sale }} $</label>
             </div>
 
             <div class="form-group">
@@ -40,14 +40,13 @@
                 @endif
             </div>
 
-            <div class="form-group">
-                <label name="group">Category:</label>
-                <select name="category_ids[]" class="form-control" multiple>
-                    <option style="pointer-events: none" value="">Select category</option>
+            <div class="form-group pd-categories">
+                <label name="group">
+                    Category:
                     @foreach ($categories as $item )
-                        <option style="pointer-events: none" value="{{ $item->id }}" {{ $product->categories->contains('id', $item->id) ? 'selected' : '' }}>{{ $item->name }}</option>
+                        @if($product->categories->contains('id', $item->id)) <span>{{ $item->name }}</span> @endif
                     @endforeach
-                </select>
+                </label>
             </div>
         </div>
     </div>

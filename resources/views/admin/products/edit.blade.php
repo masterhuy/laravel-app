@@ -43,17 +43,17 @@
                 </div>
 
                 <div class="input-group input-group-static mb-4">
-                    <label>Sale</label>
-                    <input type="text" value="{{ old('sale') ?? $product->sale }}" name="sale" class="form-control">
-                    @error('sale')
+                    <label>Price</label>
+                    <input type="text" value="{{ old('price') ?? $product->price}}" name="price" class="form-control">
+                    @error('price')
                         <span class="text-danger"> {{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="input-group input-group-static mb-4">
-                    <label>Price</label>
-                    <input type="text" value="{{ old('price') ?? $product->price}}" name="price" class="form-control">
-                    @error('price')
+                    <label>Sale</label>
+                    <input type="text" value="{{ old('sale') ?? $product->sale }}" name="sale" class="form-control">
+                    @error('sale')
                         <span class="text-danger"> {{ $message }}</span>
                     @enderror
                 </div>
