@@ -28,4 +28,8 @@ class Product extends Model
     public function categories(){
         return $this->belongsToMany(Category::class);
     }
+
+    public function getBy($dataSearch, $categoryId){
+        return $this->whereHas('categories', fn($q) => $q->where('category_id', $categoryId))->paginate(10);
+    }
 }

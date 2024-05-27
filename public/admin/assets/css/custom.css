@@ -6,4 +6,5 @@
 }
 .pd-categories label span:not(:last-child)::after{
     content: ', ';
+
 }

@@ -5,6 +5,9 @@ use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Client\HomeController;
+
+use App\Http\Controllers\Client\ProductController as ClientProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +20,7 @@ use App\Http\Controllers\Admin\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('client.layouts.app');
-});
-
+// Admin routes
 Route::get('/dashboard', function () {
     return view('admin.dashboard.index');
 })->name('dashboard');
@@ -29,3 +29,10 @@ Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('products', ProductController::class);
+
+
+// Client routes
+Route::get('/', [HomeController::class, 'index'])->name('client.home');
+
+Route::get('product/{category_id}', [ClientProductController::class, 'index'])->name('client.product.index');
+Route::get('/product-detail/{id}', [ClientProductController::class, 'show'])->name('client.product.show');
