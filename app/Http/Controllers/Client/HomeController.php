@@ -61,7 +61,8 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        return view('client.home.index', compact('product'));
     }
 
     /**

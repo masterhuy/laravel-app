@@ -95,11 +95,11 @@
     <div class="container-fluid mb-5">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100 @if(Route::current()->getName() != 'client.home') collapsed @endif" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
                     <h6 class="m-0">Categories</h6>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
-                <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                <nav class="collapse navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 @if(Route::current()->getName() == 'client.home') show @endif" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
                         @foreach($categories as $category)
                             @if($category->children->count() > 0)
@@ -130,7 +130,7 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{{ route('client.home') }}" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
+                            <a href="{{ route('products.list') }}" class="nav-item nav-link">Shop</a>
                             <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
@@ -147,6 +147,8 @@
                         </div>
                     </div>
                 </nav>
+
+                @if(Route::current()->getName() == 'client.home')
                 <div id="header-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active" style="height: 410px;">
@@ -181,6 +183,7 @@
                         </div>
                     </a>
                 </div>
+                @endif
             </div>
         </div>
     </div>
