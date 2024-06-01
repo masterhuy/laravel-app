@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Users')
+@section('title', 'Coupons')
 @section('content')
 
 <div class="card py-4 px-4">
@@ -8,41 +8,37 @@
         <div class="js-alert alert alert-success alert-dismissible text-white">{{ session('message') }}</div>
     @endif
 
-    <h3>Users list</h3>
+    <h3>Coupons list</h3>
     <div>
-        <a href="{{ route('users.create') }}" class="btn btn-primary">Create</a>
+        <a href="{{ route('coupons.create') }}" class="btn btn-primary">Create</a>
     </div>
     <div>
         <table class="table table-hover">
             <tr>
                 <th>#</th>
-                <th>Image</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Gender</th>
+                <th>Type</th>
+                <th>Value</th>
+                <th>Expery Date</th>
                 <th>Action</th>
             </tr>
 
-            @foreach ($users as $user)
+            @foreach ($coupons as $coupon)
                 <tr>
-                    <td>{{ $user->id }}</td>
-                    <td><img width="100" height="100" src={{ $user->images->count() > 0 ? asset('upload/' . $user->images->first()->url) : 'upload/default.png'}} /></td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->phone }}</td>
-                    <td>{{ $user->address }}</td>
-                    <td>{{ $user->gender }}</td>
+                    <td>{{ $coupon->id }}</td>
+                    <td>{{ $coupon->name }}</td>
+                    <td>{{ $coupon->type }}</td>
+                    <td>{{ $coupon->value }}</td>
+                    <td>{{ $coupon->expery_date }}</td>
                     <td>
-                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('coupons.edit', $coupon->id) }}" class="btn btn-warning">Edit</a>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id-{{ $user->id }}">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id-{{ $coupon->id }}">
                             Delete
                         </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="id-{{ $user->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="id-{{ $coupon->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -50,14 +46,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        Are you sure to delete user {{ $user->name }}?
+                                        Are you sure to delete coupon {{ $coupon->name }}?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <form action="{{ route('users.destroy', $user->id) }}" id="form-delete{{ $user->id }}" style="display: inline-block" method="post">
+                                        <form action="{{ route('coupons.destroy', $coupon->id) }}" id="form-delete{{ $coupon->id }}" style="display: inline-block" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-delete btn-danger" data-id={{ $user->id }}>Submit</button>
+                                            <button class="btn btn-delete btn-danger">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -67,7 +63,7 @@
                 </tr>
             @endforeach
         </table>
-        {{ $users->links() }}
+        {{ $coupons->links() }}
     </div>
 </div>
 

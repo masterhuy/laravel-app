@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Http\Requests\Coupons\CreateCouponRequest;
+use App\Http\Requests\Coupons\UpdateCouponRequest;
+use App\Models\Coupon;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CouponController extends Controller
 {
-    protected $product;
-
-    public function __construct(Product $product){
-        $this->product = $product;
+    protected $coupon;
+    public function __construct(Coupon $coupon){
+        $this->coupon = $coupon;
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $categoryId)
+    public function index()
     {
-        $products = $this->product->getBy($request->all(), $categoryId);
-
-        return view('client.products.index', compact('products'));
+        $coupons = Coupon::latest('id')->paginate(5);
+        return view('admin.coupons.index', compact('coupons'));
     }
 
     /**
@@ -32,7 +32,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.coupons.create');
     }
 
     /**
@@ -41,9 +41,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCouponRequest $request)
     {
-        //
+        $this->coupon->create($request->all());
+        return to_route('coupons.index')->with(['message' => 'Create Success']);
     }
 
     /**
@@ -54,10 +55,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-
-        $products = Product::latest()->get();
-        return view('client/products/details', compact('product', 'products'));
+        //
     }
 
     /**
@@ -68,7 +66,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $coupon = $this->coupon->find($id);
+        return view('admin.coupons.edit', compact('coupon'));
     }
 
     /**
@@ -78,9 +77,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCouponRequest $request, $id)
     {
-        //
+        $coupon = $this->coupon->findOrFail($id);
+        $dataUpdate = $request->all();
+        $coupon->update($dataUpdate);
+
+        return to_route('coupons.index')->with(['message' => 'Update successfully']);
     }
 
     /**
@@ -91,6 +94,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $coupon = $this->coupon->findOrFail($id);
+        $coupon->delete();
+        return to_route('coupons.index')->with(['message' => 'Delete successfully']);
     }
 }

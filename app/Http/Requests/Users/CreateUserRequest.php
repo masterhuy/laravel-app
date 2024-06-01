@@ -28,9 +28,9 @@ class CreateUserRequest extends FormRequest
             'image' => 'required|image|mimes:png,jpg,PNG',
             'email' => 'required|email|unique:users',
             'password' => 'required|max:10',
-            'phone' => 'required',
-            'address' => 'required',
-            'gender' => 'required'
+            // 'phone' => 'required',
+            // 'address' => 'required',
+            // 'gender' => 'required'
         ];
     }
 
@@ -48,9 +48,9 @@ class CreateUserRequest extends FormRequest
             'password.required' => 'This field is required',
             'password.max' => 'This field is max 10',
 
-            'phone.required' => 'This field is required',
-            'address.required' => 'This field is required',
-            'gender.required' => 'This field is required'
+            // 'phone.required' => 'This field is required',
+            // 'address.required' => 'This field is required',
+            // 'gender.required' => 'This field is required'
         ];
     }
 }
