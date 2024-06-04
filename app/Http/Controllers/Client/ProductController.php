@@ -13,6 +13,8 @@ class ProductController extends Controller
     public function __construct(Product $product){
         $this->product = $product;
     }
+
+
     /**
      * Display a listing of the resource.
      *

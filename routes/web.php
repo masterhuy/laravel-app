@@ -9,7 +9,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ShopController;
 use App\Http\Controllers\Client\CartController;
-
+use App\Http\Controllers\Client\CheckoutController;
+use App\Http\Controllers\Client\ContactController;
 use App\Http\Controllers\Client\ProductController as ClientProductController;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,31 +27,27 @@ use Illuminate\Support\Facades\Auth;
 
 // Client routes
 Route::get('/', [HomeController::class, 'index'])->name('client.home');
-
 Route::get('/shop', [ShopController::class, 'index'])->name('products.list');
+Route::get('/shop/search', [ShopController::class, 'searchByName'])->name('search');
+
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::delete('/cart/remove/{id}', [CartController::class, 'removeItem'])->name('cart.remove');
+
+Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('order');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('send-contact');
 
 Route::get('/product-detail/{id}', [HomeController::class, 'show'])->name('client.product.show');
 
 Route::get('product/{category_id}', [ClientProductController::class, 'index'])->name('client.product.index');
 Route::get('/product-detail/{id}', [ClientProductController::class, 'show'])->name('client.product.show');
 
-// Cart
-// Route::middleware('auth')->group(function(){
-//     Route::post('add-to-cart', [CartController::class, 'store'])->name('client.carts.add');
-//     Route::get('carts', [CartController::class, 'index'])->name('client.carts.index');
-//     Route::post('update-quantity-product-in-cart/{cart_product_id}', [CartController::class, 'updateQuantityProduct'])->name('client.carts.update_product_quantity');
-//     Route::post('remove-product-in-cart/{cart_product_id}', [CartController::class, 'removeProductInCart'])->name('client.carts.remove_product');
+Route::get('/products/filter', [ShopController::class, 'filter'])->name('products.filter');
 
-//     Route::post('apply-coupon', [CartController::class, 'applyCoupon'])->name('client.carts.apply_coupon');
 
-//     Route::get('checkout', [CartController::class, 'checkout'])->name('client.checkout.index')->middleware('user.can_checkout_cart');
-//     Route::post('process-checkout', [CartController::class, 'processCheckout'])->name('client.checkout.proccess')->middleware('user.can_checkout_cart');
-
-//     Route::get('list-orders', [OrderController::class, 'index'])->name('client.orders.index');
-
-//     Route::post('orders/cancel/{id}', [OrderController::class, 'cancel'])->name('client.orders.cancel');
-
-// });
 
 
 Auth::routes();
@@ -68,7 +65,4 @@ Route::middleware('auth')->group(function(){
     Route::resource('coupons', CouponController::class);
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

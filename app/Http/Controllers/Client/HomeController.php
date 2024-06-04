@@ -14,12 +14,6 @@ class HomeController extends Controller
         $this->category = $category;
     }
 
-    public function all()
-    {
-        $categories = $this->category->getParents();
-        return view('client.layouts.app', compact('categories'));
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +22,6 @@ class HomeController extends Controller
     public function index()
     {
         $products = Product::latest()->paginate(8);
-        // $categories = $this->category->getParents();
         return view('client.home.index', compact('products'));
     }
 
