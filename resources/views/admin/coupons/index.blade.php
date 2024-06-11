@@ -18,8 +18,9 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Type</th>
-                <th>Value</th>
+                <th>Value (%)</th>
                 <th>Expery Date</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
 
@@ -30,6 +31,14 @@
                     <td>{{ $coupon->type }}</td>
                     <td>{{ $coupon->value }}</td>
                     <td>{{ $coupon->expery_date }}</td>
+                    {{-- <td>{{ $coupon->status == 0 ? '<span class="alert alert-success">Ready</span>' : '<span class="alert alert-danger">Used</span>'}}</td> --}}
+                    <td>
+                        @if($coupon->status == 0)
+                            <span class="alert alert-success">Ready</span>
+                        @else
+                            <span class="alert alert-danger">Used</span>
+                        @endif
+                    </td>
                     <td>
                         <a href="{{ route('coupons.edit', $coupon->id) }}" class="btn btn-warning">Edit</a>
                         <!-- Button trigger modal -->

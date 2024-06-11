@@ -34,6 +34,7 @@ Route::get('/shop', [ShopController::class, 'index'])->name('products.list');
 Route::get('/shop/search', [ShopController::class, 'searchByName'])->name('search');
 
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/add-coupon', [CartController::class, 'addCoupon'])->name('coupon.add');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::delete('/cart/remove/{id}', [CartController::class, 'removeItem'])->name('cart.remove');
 

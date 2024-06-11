@@ -3,6 +3,8 @@
 @section('title', 'Cart')
 @section('content')
 
+
+
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
@@ -73,11 +75,12 @@
                 </table>
             </div>
             <div class="col-lg-4">
-                <form class="mb-5" action="">
+                <form action="{{ route('coupon.add') }}" class="mb-5" method="post">
+                    @csrf
                     <div class="input-group">
-                        <input type="text" class="form-control p-4" placeholder="Coupon Code">
+                        <input id="coupon" name="coupon" type="text" class="form-control p-4" placeholder="Coupon Code">
                         <div class="input-group-append">
-                            <button class="btn btn-primary">Apply Coupon</button>
+                            <button type="submit" class="btn btn-primary">Apply Coupon</button>
                         </div>
                     </div>
                 </form>
@@ -86,6 +89,9 @@
                         <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
                     </div>
                     <div class="card-body">
+                        @if(isset($discountPercent))
+                            {{ $discountPercent }}
+                        @endif
                         <div class="d-flex justify-content-between mb-3 pt-1">
                             <h6 class="font-weight-medium">Subtotal</h6>
                             <h6 class="font-weight-medium">${{ Cart::subtotal(); }}</h6>

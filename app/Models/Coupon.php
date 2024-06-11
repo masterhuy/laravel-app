@@ -13,6 +13,7 @@ class Coupon extends Model
         'name',
         'type',
         'value',
-        'expery_date'
+        'expery_date',
+        'status'
     ];
 }

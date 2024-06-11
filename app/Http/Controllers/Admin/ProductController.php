@@ -129,7 +129,7 @@ class ProductController extends Controller
 
         ProductDetail::insert($sizeArray);
 
-        return to_route('products.index')->with(['message' => 'Create successfull']);
+        return to_route('products.index')->with(['message' => 'Update successfull']);
     }
 
     /**

@@ -43,7 +43,9 @@ class CouponController extends Controller
      */
     public function store(CreateCouponRequest $request)
     {
-        $this->coupon->create($request->all());
+        $dataCreate = $request->all();
+        $dataCreate['status'] = 0;
+        $this->coupon->create($dataCreate);
         return to_route('coupons.index')->with(['message' => 'Create Success']);
     }
 

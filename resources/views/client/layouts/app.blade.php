@@ -227,6 +227,12 @@
         </div>
     @endif
 
+    @if (session('error'))
+        <div class="js-alert alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
 
     @yield('content')
 

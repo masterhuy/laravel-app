@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="input-group input-group-static mb-4">
-                    <label>Value</label>
+                    <label>Value (%)</label>
                     <input type="number" value="{{ old('value') }}" name="value" class="form-control">
                     @error('value')
                         <span class="text-danger"> {{ $message }}</span>
