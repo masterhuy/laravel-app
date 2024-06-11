@@ -1,6 +1,6 @@
 (function ($) {
     "use strict";
-    
+
     // Dropdown on mouse hover
     $(document).ready(function () {
         function toggleNavbarMethod() {
@@ -17,8 +17,8 @@
         toggleNavbarMethod();
         $(window).resize(toggleNavbarMethod);
     });
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -99,6 +99,51 @@
         }
         button.parent().parent().find('input').val(newVal);
     });
-    
+
 })(jQuery);
 
+
+$(document).ready(function() {
+    //Hide alert after 2 seconds
+    setTimeout(() => {
+        $('.js-alert').slideUp();
+    }, 2000);
+
+    //Search ajax
+    $('#search').on('keyup', function() {
+        let query = $(this).val();
+        // console.log(query);
+
+        if (query.length > 0) {
+            $.ajax({
+                url: searchAjaxUrl,
+                method: 'GET',
+                data: { query: query },
+                success: function(data) {
+                    let dropdown = $('#search-results');
+                    dropdown.empty();
+
+                    // console.log(data);
+
+                    if (data.length > 0) {
+                        data.forEach(function(product) {
+                            let productUrl = productShowUrl + '/' + product.id;
+                            dropdown.append(`<a href="${productUrl}" class="dropdown-item">${product.name}</a>`);
+                        });
+                        dropdown.show();
+                    } else {
+                        dropdown.append('<a href="#" class="dropdown-item">No results found</a>');
+                    }
+                }
+            });
+        } else {
+            $('#search-results').hide();
+        }
+    });
+
+    $(document).click(function(e) {
+        if (!$(e.target).closest('#search').length) {
+            $('#search-results').hide();
+        }
+    });
+});

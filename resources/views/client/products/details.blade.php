@@ -17,7 +17,7 @@
 
     <!-- Shop Detail Start -->
     <div class="container-fluid py-5">
-        <form action="{{ route('client.carts.add') }}" method="post" class="row px-xl-5">
+        <form action="{{ route('cart.add') }}" method="post" class="row px-xl-5">
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <div class="col-lg-5 pb-5">
@@ -68,19 +68,9 @@
 
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus" >
-                            <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <input type="text" class="form-control bg-secondary text-center" value="1">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
+                        <input type="number" name="quantity" class="form-control bg-secondary text-center" value="1">
                     </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                    <button type="submit" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
                 </div>
                 <div class="d-flex pt-2">
                     <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>

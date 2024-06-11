@@ -67,13 +67,14 @@
             <div class="col-lg-6 col-6 text-left">
                 <form action="">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
+                        <input id="search" type="text" class="form-control" placeholder="Search for products">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
                             </span>
                         </div>
                     </div>
+                    <div id="search-results" class="dropdown-menu" style="width: 100%;">xxx</div>
                 </form>
             </div>
             <div class="col-lg-3 col-6 text-right">
@@ -92,7 +93,7 @@
 
 
     <!-- Navbar Start -->
-    <div class="container-fluid mb-5">
+    <div class="container-fluid mb-0">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100 @if(Route::current()->getName() != 'client.home') collapsed @endif" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
@@ -141,8 +142,39 @@
                             <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="/login" class="nav-item nav-link">Login</a>
-                            <a href="/register" class="nav-item nav-link">Register</a>
+                            {{-- <a href="/login" class="nav-item nav-link">Login</a>
+                            <a href="/register" class="nav-item nav-link">Register</a> --}}
+                            @guest
+                                @if (Route::has('login'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                    </li>
+                                @endif
+
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                                    </li>
+                                @endif
+                            @else
+                                <div class="dropdown">
+                                    <a id="navbarDropdown" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                        {{ Auth::user()->name }}
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </div>
+                            @endguest
                         </div>
                     </div>
                 </nav>
@@ -190,7 +222,7 @@
 
     <!-- Đây là ví dụ về cách hiển thị thông báo -->
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="js-alert alert alert-success">
             {{ session('success') }}
         </div>
     @endif
@@ -239,11 +271,10 @@
                     <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
                     <form action="">
                         <div class="form-group">
-                            <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
+                            <input type="text" class="form-control border-0 py-4" placeholder="Your Name" />
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
-                                required="required" />
+                            <input type="email" class="form-control border-0 py-4" placeholder="Your Email" />
                         </div>
                         <div>
                             <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe Now</button>
@@ -284,7 +315,12 @@
     <script src="{{ asset('client/mail/contact.js') }}"></script>
 
     <!-- Template Javascript -->
+    <script>
+        var searchAjaxUrl = '{{ route("search-ajax") }}';
+        var productShowUrl = '{{ url("/product-detail") }}';
+    </script>
     <script src="{{ asset('client/js/main.js') }}"></script>
+
 
     @yield('scripts')
 </body>

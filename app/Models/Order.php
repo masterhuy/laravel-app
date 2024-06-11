@@ -19,4 +19,9 @@ class Order extends Model
         'note',
         'payment'
     ];
+
+    public function productOrders()
+    {
+        return $this->hasMany(ProductOrder::class);
+    }
 }

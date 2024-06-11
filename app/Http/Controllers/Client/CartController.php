@@ -19,10 +19,11 @@ class CartController extends Controller
 
     public function addToCart(Request $request){
         $productId = $request->input('product_id');
-        $quantity = $request->input('quantity', 1);
+        $quantity = $request->input('quantity');
         $product = Product::findOrFail($productId);
 
         Cart::add($product->id, $product->name, $quantity, $product->price);
+
 
         return redirect()->back()->with('success', 'Add to cart successfully');
     }

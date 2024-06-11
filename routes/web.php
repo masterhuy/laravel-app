@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Client\HomeController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\CheckoutController;
 use App\Http\Controllers\Client\ContactController;
 use App\Http\Controllers\Client\ProductController as ClientProductController;
+use App\Http\Controllers\Client\SearchController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -47,6 +50,8 @@ Route::get('/product-detail/{id}', [ClientProductController::class, 'show'])->na
 
 Route::get('/products/filter', [ShopController::class, 'filter'])->name('products.filter');
 
+Route::get('/search', [SearchController::class, 'search'])->name('search-ajax');
+
 
 
 
@@ -63,6 +68,20 @@ Route::middleware('auth')->group(function(){
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
     Route::resource('coupons', CouponController::class);
+
+    //contacts
+    Route::get('/contacts', [AdminContactController::class, 'index'])->name('contacts.index');
+    Route::get('/contacts/edit/{id}', [AdminContactController::class, 'edit'])->name('contacts.edit');
+    Route::put('/contacts/edit/{id}', [AdminContactController::class, 'update'])->name('contacts.update');
+    Route::delete('/contacts/delete/{id}', [AdminContactController::class, 'destroy'])->name('contacts.destroy');
+
+    //orders
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->name('orders.edit');
+    Route::put('/orders/edit/{id}', [OrderController::class, 'update'])->name('orders.update');
+    Route::delete('/orders/delete/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
+    Route::delete('/orders/delete', [OrderController::class, 'destroySelected'])->name('orders.selected.destroy');
 });
 
 

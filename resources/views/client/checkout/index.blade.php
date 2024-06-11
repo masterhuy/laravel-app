@@ -68,6 +68,36 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="card border-secondary mb-5">
+                        <div class="card-header bg-secondary border-0">
+                            <h4 class="font-weight-semi-bold m-0">Payment</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" name="payment" id="paypal" value="Paypal">
+                                    <label class="custom-control-label" for="paypal">Paypal</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" name="payment" id="directcheck" value="Direct Check">
+                                    <label class="custom-control-label" for="directcheck">Direct Check</label>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" name="payment" id="banktransfer" value="Bank Transfer">
+                                    <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer border-secondary bg-transparent">
+                            @if(Cart::total() > 0)
+                                <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Place Order</button>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -79,8 +109,11 @@
                         <h5 class="font-weight-medium mb-3">Products</h5>
 
                         @foreach($cartContents as $item)
-                            <div class="d-flex justify-content-between">
-                                <p>{{ $item->name }}</p>
+                            <div>
+                                <div class="d-flex justify-content-between">
+                                    <p>{{ $item->name }}</p>
+                                    <p>x{{ $item->qty }}</p>
+                                </div>
                                 <p>${{ $item->price }}</p>
                             </div>
                         @endforeach
@@ -104,36 +137,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card border-secondary mb-5">
-                    <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Payment</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="paypal" value="Paypal">
-                                <label class="custom-control-label" for="paypal">Paypal</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="directcheck" value="Direct Check">
-                                <label class="custom-control-label" for="directcheck">Direct Check</label>
-                            </div>
-                        </div>
-                        <div class="">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="banktransfer" value="Bank Transfer">
-                                <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer border-secondary bg-transparent">
-                        @if(Cart::total() > 0)
-                            <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Place Order</button>
-                        @endif
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>

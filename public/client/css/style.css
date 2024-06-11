@@ -9598,3 +9598,6 @@ a.text-dark:hover, a.text-dark:focus {
     align-items: center;
     cursor: pointer;
 }
+body{
+    overflow-x: hidden;
+}

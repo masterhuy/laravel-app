@@ -9,22 +9,11 @@ use App\Models\Product;
 
 class ShopController extends Controller
 {
-    // count product filter
-    public function countProduct($start, $end){
-        $numbers = Product::where('price', '>', $start)
-                    ->where('price', '<', $end)
-                    ->count();
-        return $numbers;
-    }
-
     // get list of products
     public function index(){
         $products = Product::latest()->paginate(10);
 
-        $count_0_100 = $this->countProduct(0, 100);
-        $count_101_200 = $this->countProduct(101, 200);
-
-        return view('client.shop.index', compact('products', 'count_0_100', 'count_101_200'));
+        return view('client.shop.index', compact('products'));
     }
 
     // get product filter
@@ -40,12 +29,9 @@ class ShopController extends Controller
             }
         }
 
-        $count_0_100 = $this->countProduct(0, 100);
-        $count_101_200 = $this->countProduct(101, 200);
-
         $products = $productsAll->latest()->paginate(10);
 
-        return view('client.shop.index', compact('products', 'priceRanges', 'count_0_100', 'count_101_200'));
+        return view('client.shop.index', compact('products', 'priceRanges'));
     }
 
     // get product search by name
@@ -54,9 +40,6 @@ class ShopController extends Controller
 
         $products = Product::where('name', 'like', '%'.$keyword.'%')->latest()->paginate(10);
 
-        $count_0_100 = $this->countProduct(0, 100);
-        $count_101_200 = $this->countProduct(101, 200);
-
-        return view('client.shop.index', compact('products', 'count_0_100', 'count_101_200'));
+        return view('client.shop.index', compact('products'));
     }
 }

@@ -16,7 +16,8 @@ class UserController extends Controller
     protected $user;
     protected $role;
 
-    public function __construct(User $user, Role $role){
+    public function __construct(User $user, Role $role)
+    {
         $this->user = $user;
         $this->role = $role;
     }
@@ -136,6 +137,5 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index')->with(['message' => 'Delete success']);
-
     }
 }

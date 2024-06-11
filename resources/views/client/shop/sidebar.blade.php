@@ -11,7 +11,9 @@
                     value="0-100"
                     class="custom-control-input"
                     id="price-1"
-                    {{-- {{ collect($priceRanges)->contains('0-100') ? 'checked' : ''}} --}}
+                    @if(isset($priceRanges))
+                        {{ collect($priceRanges)->contains('0-100') ? 'checked' : ''}}
+                    @endif
                 >
                 <label class="custom-control-label" for="price-1">$0 - $100</label>
                 <span class="badge border font-weight-normal">{{ $count_0_100 }}</span>
@@ -23,7 +25,9 @@
                     value="101-200"
                     class="custom-control-input"
                     id="price-2"
-                    {{-- {{ collect($priceRanges)->contains('101-200') ? 'checked' : ''}} --}}
+                    @if(isset($priceRanges))
+                        {{ collect($priceRanges)->contains('101-200') ? 'checked' : ''}}
+                    @endif
                 >
                 <label class="custom-control-label" for="price-2">$101 - $200</label>
                 <span class="badge border font-weight-normal">{{ $count_101_200 }}</span>

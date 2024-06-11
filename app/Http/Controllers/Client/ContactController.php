@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Http\Requests\Contact\CreateContactRequest;
+use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
 
-        Mail::to($dataCreate['email'])->send(new \App\Mail\ContactMail($validatedData));
+        Mail::to($dataCreate['email'])->send(new ContactMail($validatedData));
 
         return to_route('send-contact')->with(['message' => 'Send message successfully']);
     }

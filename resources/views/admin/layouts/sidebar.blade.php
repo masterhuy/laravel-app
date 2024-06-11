@@ -57,6 +57,22 @@
                     <span class="nav-link-text ms-1">Coupons</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ request()->routeIs('orders.*') ? 'bg-gradient-primary active' : '' }}" href="{{ route('orders.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Orders</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ request()->routeIs('contacts.*') ? 'bg-gradient-primary active' : '' }}" href="{{ route('contacts.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Contacts</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

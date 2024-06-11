@@ -2,11 +2,14 @@
 @extends('client.layouts.app')
 @section('title', 'Products list')
 @section('content')
-    <div class="row ">
-        <div class="d-inline-flex" style="margin-left:40px">
-            <p class="m-0"><a href="">Home</a></p>
-            <p class="m-0 px-2">/</p>
-            <p class="m-0">Shop</p>
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Our Shop</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Shop</p>
+            </div>
         </div>
     </div>
     <!-- Page Header End -->
@@ -37,9 +40,9 @@
                                     Sort by
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                    <a class="dropdown-item" href="#" data-sort="latest">Latest</a>
-                                    <a class="dropdown-item" href="#" data-sort="price_asc">Price asc</a>
-                                    <a class="dropdown-item" href="#" data-sort="price_desc">Price desc</a>
+                                    <a class="dropdown-item" data-sort="latest">Latest</a>
+                                    <a class="dropdown-item" data-sort="price_asc">Price asc</a>
+                                    <a class="dropdown-item" data-sort="price_desc">Price desc</a>
                                 </div>
                             </div>
                         </div>
@@ -95,6 +98,7 @@
     $(document).ready(function() {
         $('.dropdown-item').on('click', function() {
             var sortValue = $(this).data('sort');
+
             if (sortValue == 'latest') {
                 $("#triggerId").text('Lastest');
             }else if((sortValue == 'price_asc')){
@@ -108,9 +112,12 @@
 
         function sortProducts(sortValue) {
             var products = $('.product-item');
-            if (sortValue === 'latest') {
+            if (sortValue == 'latest') {
                 products.sort(function(a, b) {
-                    return $(b).data('date') - $(a).data('date');
+                    // return $(b).data('date') - $(a).data('date');
+                    var dateA = new Date($(a).data('date'));
+                    var dateB = new Date($(b).data('date'));
+                    return dateA - dateB;
                 });
             } else if (sortValue === 'price_asc') {
                 products.sort(function(a, b) {
